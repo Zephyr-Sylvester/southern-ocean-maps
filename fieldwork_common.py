@@ -129,16 +129,16 @@ def plot_row(ax: plt.Axes, row: pd.Series, number: int, label: str) -> str:
         if pa is not None and pb is not None:
             xa, ya = project(*pa)
             xb, yb = project(*pb)
-            ax.plot([xa, xb], [ya, yb], linestyle="--", color="dimgrey", linewidth=1.5, zorder=3)
+            ax.plot([xa, xb], [ya, yb], linestyle="--", color="darkorange", linewidth=2, zorder=3)
             mx, my = (xa + xb) / 2, (ya + yb) / 2
-            _halo_annotate(ax, str(number), (mx, my), color="dimgrey")
+            _halo_annotate(ax, str(number), (mx, my), color="darkorange")
             return f"{number}. {label} ({location}, approx.)"
 
     place = _resolve_place(location)
     if place is not None:
         x, y = project(*place)
-        ax.scatter([x], [y], marker="*", facecolor="none", edgecolor="dimgrey", linewidth=1, s=90, zorder=4)
-        _halo_annotate(ax, str(number), (x, y), color="dimgrey")
+        ax.scatter([x], [y], marker="*", facecolor="none", edgecolor="darkorange", linewidth=1.4, s=110, zorder=4)
+        _halo_annotate(ax, str(number), (x, y), color="darkorange")
         return f"{number}. {label} ({location}, approx.)"
 
     return f"{number}. {label} ({location}, no coordinates)"
