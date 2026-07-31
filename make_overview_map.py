@@ -28,6 +28,8 @@ def main() -> None:
     fig, ax = cgplot.basemap(figsize=(13, 13), attribution=citations)
 
     bathy.plot(ax=ax, cmap=depth_cmap, norm=depth_norm, add_colorbar=False)
+    ax.set_xlabel("")
+    ax.set_ylabel("")
     cgplot.add_colour_scale(ax=ax, cuts=cg.DEPTH_CUTS, cols=cg.DEPTH_COLS, title="Depth (m)", size="4%", pad=0.2)
     cgplot.add_reference_grid(ax=ax, res_lat=10, res_lon=20, lab_lon=0, fontsize=8)
 
