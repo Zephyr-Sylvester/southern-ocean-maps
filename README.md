@@ -40,16 +40,21 @@ Scotia Sea) at a higher bathymetry resolution.
 ### Planned PREDYCT fieldwork, Subareas 48.1 & 48.2
 
 `fieldwork_common.py` holds the shared plotting logic (basemap, numbered
-markers, wrapped per-panel footnotes) for two figures, both reading
-`data/planned-predyct-fieldwork.csv` -- gitignored, not in this repo;
-supply your own CSV with `Location,Longitude,Latitude,Activity,Who`
-columns to reproduce either one.
+markers, wrapped footnotes, near-duplicate grouping) for three figures,
+all reading `data/planned-predyct-fieldwork.csv` -- gitignored, not in
+this repo; supply your own CSV with `Location,Longitude,Latitude,Activity,Who`
+columns to reproduce any of them.
 
-Both: filled circles are precise GPS coordinates from the CSV; open
+All three: filled circles are precise GPS coordinates from the CSV; open
 stars and dashed lines are approximate placements for named regions the
-CSV didn't supply coordinates for (not survey boundaries). Numbered
-markers avoid label collisions where sites cluster close together; each
-panel's numbered footnote gives the full detail.
+CSV didn't supply coordinates for (not survey boundaries), using a small
+manually-curated table of region coordinates (`PLACE_COORDS`) rather than
+anything derived automatically. Numbered markers (with a white text halo
+for legibility over the basemap) avoid label collisions where sites
+cluster close together; sites at the same named place are also grouped
+into a single marker/footnote entry (`LOCATION_ALIASES`, e.g. three
+separate King George Island penguin-tagging efforts collapse to one
+"(3 sites)" entry) rather than stacking near-identical markers.
 
 **By country** -- `make_subarea48_fieldwork_by_country.py` ->
 `output/subarea48_fieldwork_by_country.png`. One panel per leading
@@ -61,13 +66,25 @@ mooring, cetacean, penguin and seal fieldwork falls.
 **By fieldwork type** -- `make_subarea48_fieldwork_by_type.py` ->
 `output/subarea48_fieldwork_by_type.png`. One panel per discipline (krill
 biomass surveys, moorings, fisheries acoustics, cetacean & whale work,
-penguin monitoring & tagging, seal tagging) instead of per country, each
-footnote naming which country does that site. Activity strings are
-mapped to a fieldwork type by keyword match (`categorize()`); it raises
-if a new CSV row doesn't match any known keyword, rather than silently
-dropping it into the wrong panel.
+penguin monitoring & tagging, seal tagging) instead of per country.
+Activity strings are mapped to a fieldwork type by keyword match
+(`categorize()`); it raises if a new CSV row doesn't match any known
+keyword, rather than silently dropping it into the wrong panel.
 
 ![Planned PREDYCT fieldwork by type](output/subarea48_fieldwork_by_type.png)
+
+**Summary** -- `make_subarea48_fieldwork_summary.py` ->
+`output/subarea48_fieldwork_summary.png`. A single unfaceted map of every
+planned activity, meant to show *where* effort concentrates rather than
+compare countries or disciplines -- e.g. that Gerlache Strait has both
+cetacean tagging and crabeater seal tagging planned, which the faceted
+figures above can't show since each activity sits in its own panel.
+Activities sharing a place are listed together under one marker rather
+than distinguished by marker colour, since overlapping translucent
+colours at the same point blend into a colour matching neither legend
+entry.
+
+![Planned PREDYCT fieldwork summary](output/subarea48_fieldwork_summary.png)
 
 ## License
 
