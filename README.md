@@ -27,3 +27,30 @@ colour scale, a custom shape legend, and a rule-9 data-source/projection
 attribution caption -- all in the CCAMLR standard CRS (EPSG:6932).
 
 ![CCAMLR Convention Area overview](output/ccamlr_overview.png)
+
+### Subarea 48 zoom
+
+`make_subarea48_map.py` -> `output/subarea48_overview.png`
+
+The same style, cropped to CCAMLR Subarea 48 (Antarctic Peninsula /
+Scotia Sea) at a higher bathymetry resolution.
+
+![CCAMLR Subarea 48](output/subarea48_overview.png)
+
+### Planned PREDYCT fieldwork, Subareas 48.1 & 48.2
+
+`make_subarea48_fieldwork.py` -> `output/subarea48_fieldwork_by_country.png`
+(reads `data/planned-predyct-fieldwork.csv` -- gitignored, not in this repo;
+supply your own CSV with `Location,Longitude,Latitude,Activity,Who`
+columns to reproduce this one)
+
+One panel per leading country/collaboration, each showing where that
+group's planned krill, mooring, cetacean, penguin and seal fieldwork
+falls within Subareas 48.1 (Antarctic Peninsula) and 48.2 (South Orkney
+Islands). Numbered markers avoid label collisions where sites cluster
+close together; each panel's numbered footnote gives the full activity
+and location. Filled circles are precise GPS coordinates from the CSV;
+open stars and dashed lines are approximate placements for named regions
+the CSV didn't supply coordinates for (not survey boundaries).
+
+![Planned PREDYCT fieldwork by country](output/subarea48_fieldwork_by_country.png)
