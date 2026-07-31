@@ -39,18 +39,36 @@ Scotia Sea) at a higher bathymetry resolution.
 
 ### Planned PREDYCT fieldwork, Subareas 48.1 & 48.2
 
-`make_subarea48_fieldwork.py` -> `output/subarea48_fieldwork_by_country.png`
-(reads `data/planned-predyct-fieldwork.csv` -- gitignored, not in this repo;
+`fieldwork_common.py` holds the shared plotting logic (basemap, numbered
+markers, wrapped per-panel footnotes) for two figures, both reading
+`data/planned-predyct-fieldwork.csv` -- gitignored, not in this repo;
 supply your own CSV with `Location,Longitude,Latitude,Activity,Who`
-columns to reproduce this one)
+columns to reproduce either one.
 
-One panel per leading country/collaboration, each showing where that
-group's planned krill, mooring, cetacean, penguin and seal fieldwork
-falls within Subareas 48.1 (Antarctic Peninsula) and 48.2 (South Orkney
-Islands). Numbered markers avoid label collisions where sites cluster
-close together; each panel's numbered footnote gives the full activity
-and location. Filled circles are precise GPS coordinates from the CSV;
-open stars and dashed lines are approximate placements for named regions
-the CSV didn't supply coordinates for (not survey boundaries).
+Both: filled circles are precise GPS coordinates from the CSV; open
+stars and dashed lines are approximate placements for named regions the
+CSV didn't supply coordinates for (not survey boundaries). Numbered
+markers avoid label collisions where sites cluster close together; each
+panel's numbered footnote gives the full detail.
+
+**By country** -- `make_subarea48_fieldwork_by_country.py` ->
+`output/subarea48_fieldwork_by_country.png`. One panel per leading
+country/collaboration, each showing where that group's planned krill,
+mooring, cetacean, penguin and seal fieldwork falls.
 
 ![Planned PREDYCT fieldwork by country](output/subarea48_fieldwork_by_country.png)
+
+**By fieldwork type** -- `make_subarea48_fieldwork_by_type.py` ->
+`output/subarea48_fieldwork_by_type.png`. One panel per discipline (krill
+biomass surveys, moorings, fisheries acoustics, cetacean & whale work,
+penguin monitoring & tagging, seal tagging) instead of per country, each
+footnote naming which country does that site. Activity strings are
+mapped to a fieldwork type by keyword match (`categorize()`); it raises
+if a new CSV row doesn't match any known keyword, rather than silently
+dropping it into the wrong panel.
+
+![Planned PREDYCT fieldwork by type](output/subarea48_fieldwork_by_type.png)
+
+## License
+
+GPL-3.0-or-later (`LICENSE`), matching `ccamlrgis-py`.
