@@ -7,6 +7,7 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 
 import ccamlrgis as cg
 import ccamlrgis.plot as cgplot
+from figure_io import save_fig
 
 OUT_PATH = "output/subarea48_overview.png"
 SUBAREA_48_CODES = ["481", "482", "483", "484", "485", "486"]
@@ -29,13 +30,13 @@ def main() -> None:
     citations = [asds_all.attrs["citation"], eezs.attrs["citation"], coast.attrs["citation"]]
     fig, ax = cgplot.basemap(figsize=(11, 11), attribution=citations)
 
-    bathy48.plot(ax=ax, cmap=depth_cmap, norm=depth_norm, add_colorbar=False)
+    bathy48.plot(ax=ax, cmap=depth_cmap, norm=depth_norm, add_colorbar=False, rasterized=True)
     ax.set_xlabel("")
     ax.set_ylabel("")
     cgplot.add_colour_scale(ax=ax, cuts=cg.DEPTH_CUTS, cols=cg.DEPTH_COLS, title="Depth (m)", size="4%", pad=0.2)
     cgplot.add_reference_grid(ax=ax, bounds=bounds, res_lat=5, res_lon=10, fontsize=8)
 
-    coast_land.plot(ax=ax, color="dimgrey", linewidth=0)
+    coast_land.plot(ax=ax, color="dimgrey", linewidth=0, rasterized=True)
     eezs.boundary.plot(ax=ax, edgecolor="purple", linewidth=1, linestyle="--")
     asds48.boundary.plot(ax=ax, edgecolor="black", linewidth=1.3)
     cgplot.add_labels(ax=ax, mode="auto", layer="ASDs", fontsize=10, fonttype=2, colour="red")
@@ -51,8 +52,7 @@ def main() -> None:
     cgplot.add_legend(ax=ax, items=items, title="Legend", loc="upper left", fontsize=9)
 
     ax.set_title("CCAMLR Subarea 48", fontsize=18, fontweight="bold", pad=14)
-    fig.savefig(OUT_PATH, dpi=200, bbox_inches="tight")
-    print(f"Saved {OUT_PATH}")
+    save_fig(fig, OUT_PATH, dpi=200, bbox_inches="tight")
 
 
 if __name__ == "__main__":

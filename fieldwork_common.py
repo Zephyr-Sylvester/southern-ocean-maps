@@ -15,6 +15,7 @@ import pandas as pd
 
 import ccamlrgis as cg
 import ccamlrgis.plot as cgplot
+from figure_io import save_fig
 
 CSV_PATH = "data/planned-predyct-fieldwork.csv"
 FOOTNOTE_WRAP_WIDTH = 40
@@ -68,7 +69,7 @@ def project(lat: float, lon: float) -> tuple[float, float]:
 
 def draw_basemap(ax: plt.Axes, coast_land, asds48, bounds: tuple[float, float, float, float]) -> None:
     cgplot.basemap(ax=ax, xlim=(bounds[0], bounds[2]), ylim=(bounds[1], bounds[3]))
-    coast_land.plot(ax=ax, color="lightgrey", edgecolor="black", linewidth=0.2)
+    coast_land.plot(ax=ax, color="lightgrey", edgecolor="black", linewidth=0.2, rasterized=True)
     asds48.boundary.plot(ax=ax, edgecolor="black", linewidth=1)
     cgplot.add_reference_grid(ax=ax, bounds=bounds, res_lat=2, res_lon=5, fontsize=6, linewidth=0.5)
 
@@ -214,8 +215,7 @@ def build_single_map(
     wrapped = "\n".join(textwrap.fill(line, width=55, subsequent_indent="    ") for line in footnotes)
     fig.text(0.67, 0.94, wrapped, fontsize=8, va="top", ha="left")
     fig.text(0.5, 0.01, caption, fontsize=8, ha="center", color="dimgrey")
-    fig.savefig(out_path, dpi=170)
-    print(f"Saved {out_path}")
+    save_fig(fig, out_path, dpi=170)
 
 
 def build_figure(
@@ -268,5 +268,4 @@ def build_figure(
     # instead; `bottom` needs to comfortably fit the busiest panel's
     # wrapped footnote list, not just look right for the others.
     fig.subplots_adjust(left=0.03, right=0.99, top=0.94, bottom=bottom_margin, hspace=hspace, wspace=0.25)
-    fig.savefig(out_path, dpi=180)
-    print(f"Saved {out_path}")
+    save_fig(fig, out_path, dpi=180)
