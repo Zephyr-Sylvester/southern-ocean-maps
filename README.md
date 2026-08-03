@@ -17,9 +17,15 @@ python make_overview_map.py
 
 ## Figures
 
+Every script below saves both a PNG (for inline viewing, e.g. this
+README) and a vector PDF of the same figure, via the shared
+`figure_io.save_fig()` helper -- the heavy bathymetry/coastline layers
+are rasterized within the PDF to keep file size reasonable, while text,
+legend, grid and markers stay true vector.
+
 ### CCAMLR Convention Area overview
 
-`make_overview_map.py` -> `output/ccamlr_overview.png`
+`make_overview_map.py` -> `output/ccamlr_overview.png` (+ `.pdf`)
 
 Full-resolution bathymetry (`load_bathy`), ASD/Subarea boundaries and
 labels, EEZ boundaries, coastline, a reference grid, a non-overlapping
@@ -30,7 +36,7 @@ attribution caption -- all in the CCAMLR standard CRS (EPSG:6932).
 
 ### Subarea 48 zoom
 
-`make_subarea48_map.py` -> `output/subarea48_overview.png`
+`make_subarea48_map.py` -> `output/subarea48_overview.png` (+ `.pdf`)
 
 The same style, cropped to CCAMLR Subarea 48 (Antarctic Peninsula /
 Scotia Sea) at a higher bathymetry resolution.
@@ -57,14 +63,14 @@ separate King George Island penguin-tagging efforts collapse to one
 "(3 sites)" entry) rather than stacking near-identical markers.
 
 **By country** -- `make_subarea48_fieldwork_by_country.py` ->
-`output/subarea48_fieldwork_by_country.png`. One panel per leading
+`output/subarea48_fieldwork_by_country.png` (+ `.pdf`). One panel per leading
 country/collaboration, each showing where that group's planned krill,
 mooring, cetacean, penguin and seal fieldwork falls.
 
 ![Planned PREDYCT fieldwork by country](output/subarea48_fieldwork_by_country.png)
 
 **By fieldwork type** -- `make_subarea48_fieldwork_by_type.py` ->
-`output/subarea48_fieldwork_by_type.png`. One panel per discipline (krill
+`output/subarea48_fieldwork_by_type.png` (+ `.pdf`). One panel per discipline (krill
 biomass surveys, moorings, fisheries acoustics, cetacean & whale work,
 penguin monitoring & tagging, seal tagging) instead of per country.
 Activity strings are mapped to a fieldwork type by keyword match
@@ -74,7 +80,7 @@ keyword, rather than silently dropping it into the wrong panel.
 ![Planned PREDYCT fieldwork by type](output/subarea48_fieldwork_by_type.png)
 
 **Summary** -- `make_subarea48_fieldwork_summary.py` ->
-`output/subarea48_fieldwork_summary.png`. A single unfaceted map of every
+`output/subarea48_fieldwork_summary.png` (+ `.pdf`). A single unfaceted map of every
 planned activity, meant to show *where* effort concentrates rather than
 compare countries or disciplines -- e.g. that Gerlache Strait has both
 cetacean tagging and crabeater seal tagging planned, which the faceted
