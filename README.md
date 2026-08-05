@@ -92,6 +92,14 @@ entry.
 
 ![Planned PREDYCT fieldwork summary](output/subarea48_fieldwork_summary.png)
 
+**Tutorial notebook** -- `fieldwork_example.ipynb` walks through this same
+workflow step by step as a `ccamlrgis` usage example (projecting
+coordinates, drawing the basemap, plotting precise vs. approximate
+placements, grouping nearby sites, faceting into comparison panels),
+explaining each `ccamlrgis`/`ccamlrgis.plot` call and design decision
+along the way, rather than the terser scripts above. Its committed
+outputs are real, executed against the actual dataset.
+
 ## License
 
 GPL-3.0-or-later (`LICENSE`), matching `ccamlrgis-py`.
